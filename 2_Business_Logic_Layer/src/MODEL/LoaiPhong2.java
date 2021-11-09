@@ -2,7 +2,7 @@
 package MODEL;
 
 
-public class LoaiPhong {
+public class LoaiPhong2 {
     private String id;
     private String maLoaiPhong;
     private String tenLoai;
@@ -11,10 +11,10 @@ public class LoaiPhong {
     private String moTa;
     private int trangThai;
 
-    public LoaiPhong() {
+    public LoaiPhong2() {
     }
 
-    public LoaiPhong(String id, String maLoaiPhong, String tenLoai, float giaTien, float dienTich, String moTa, int trangThai) {
+    public LoaiPhong2(String id, String maLoaiPhong, String tenLoai, float giaTien, float dienTich, String moTa, int trangThai) {
         this.id = id;
         this.maLoaiPhong = maLoaiPhong;
         this.tenLoai = tenLoai;

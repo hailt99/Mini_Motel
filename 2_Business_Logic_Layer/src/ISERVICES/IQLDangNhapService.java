@@ -2,9 +2,9 @@
 package ISERVICES;
 
 import MODEL.QuanLy;
-import java.util.List;
 
 
 public interface IQLDangNhapService {
-    void checkLogin();
+    boolean checkLogin(String taiKhoan, String matKhau);
+    void dangKy(QuanLy quanLy);
 }

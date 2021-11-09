@@ -29,7 +29,7 @@ public class QLLoaiPhongService implements IQLLoaiPhongService{
     }
 
     @Override
-    public void xoa() {
+    public void xoa(String maLoaiPhong) {
         
     }
 

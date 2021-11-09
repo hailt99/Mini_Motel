@@ -9,24 +9,35 @@ import java.util.List;
 
 public class QLDangNhapService implements IQLDangNhapService{
     
-    IQuanLyService quanLyService;
-
-//    @Override
-//    public void checkLogin(String taiKhoan, String matKhau) {
-//        try {
-//            List<QuanLy> lstQuanLy = quanLyService.getLstQuanLy();
-//            if(taiKhoan.equals("")){
-//            
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
+    IQuanLyService iquanLyService;
 
     @Override
-    public void checkLogin() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean checkLogin(String taiKhoan, String matKhau) {
+        try {
+            List<QuanLy> lstQuanLy = iquanLyService.getLstQuanLy();
+            for(QuanLy quanLy : lstQuanLy){
+                if(taiKhoan.equals(quanLy.getTenTaiKhoan()) && matKhau.equals(quanLy.getMatKhau())){
+                    return true;
+                } else{
+                    return false;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return true;
     }
+
+    @Override
+    public void dangKy(QuanLy quanLy) {
+        try {
+            iquanLyService.insert(quanLy);
+        } catch (Exception e) {
+            throw new RuntimeException();
+        }
+    }
+
+    
     
     
 }
