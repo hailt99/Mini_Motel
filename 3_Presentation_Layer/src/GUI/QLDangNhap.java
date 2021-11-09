@@ -1,6 +1,7 @@
-
 package GUI;
 
+import ISERVICES.IQLDangNhapService;
+import Ultilities.DialogHelper;
 import java.awt.CardLayout;
 import java.awt.Desktop;
 import java.io.IOException;
@@ -8,17 +9,14 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import javax.swing.ImageIcon;
 
-
 public class QLDangNhap extends javax.swing.JFrame {
 
-    
     public QLDangNhap() {
-        initComponents();        
+        initComponents();
         setLocationRelativeTo(null);
         this.setIcon();
     }
 
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -51,8 +49,8 @@ public class QLDangNhap extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         txtXacNhanMK = new javax.swing.JPasswordField();
         jLabel8 = new javax.swing.JLabel();
-        txtEmail = new javax.swing.JPasswordField();
         btnBack = new javax.swing.JButton();
+        txtEmail = new javax.swing.JTextField();
         pnQuenMatKhau = new javax.swing.JPanel();
         lblLogo2 = new javax.swing.JLabel();
         btnBack1 = new javax.swing.JButton();
@@ -127,6 +125,11 @@ public class QLDangNhap extends javax.swing.JFrame {
 
         jButton1.setText("Đăng nhập");
         jButton1.setPreferredSize(new java.awt.Dimension(85, 27));
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         lblQuenMatKhau1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         lblQuenMatKhau1.setText("Đăng ký tài khoản");
@@ -206,7 +209,7 @@ public class QLDangNhap extends javax.swing.JFrame {
                 .addGroup(pnDangNhapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblQuenMatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblQuenMatKhau1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(51, Short.MAX_VALUE))
+                .addContainerGap(52, Short.MAX_VALUE))
         );
 
         pnDangNhapLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {txtMatKhau, txtTenTaiKhoan});
@@ -283,14 +286,15 @@ public class QLDangNhap extends javax.swing.JFrame {
                     .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.LEADING))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(pnDangKyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnDangKy, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(pnDangKyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(txtXacNhanMK, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(pnDangKyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtTenTaiKhoan_DK, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtMatKhau_DK, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(txtEmail, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(pnDangKyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(pnDangKyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(btnDangKy, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(pnDangKyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(txtXacNhanMK, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(pnDangKyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(txtTenTaiKhoan_DK, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtMatKhau_DK, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(187, Short.MAX_VALUE))
         );
         pnDangKyLayout.setVerticalGroup(
@@ -317,21 +321,21 @@ public class QLDangNhap extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(pnDangKyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(pnDangKyLayout.createSequentialGroup()
                         .addComponent(txtTenTaiKhoan_DK, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(txtMatKhau_DK, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(txtXacNhanMK, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtXacNhanMK, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addComponent(btnDangKy, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
                 .addGap(47, 47, 47))
         );
 
-        pnDangKyLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jLabel5, jLabel6, jLabel7, jLabel8, txtEmail, txtMatKhau_DK, txtTenTaiKhoan_DK, txtXacNhanMK});
+        pnDangKyLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jLabel5, jLabel6, jLabel7, jLabel8, txtMatKhau_DK, txtTenTaiKhoan_DK, txtXacNhanMK});
 
         pnCardParent.add(pnDangKy, "cardDangKy");
 
@@ -418,7 +422,7 @@ public class QLDangNhap extends javax.swing.JFrame {
                     .addComponent(txtTenTaiKhoan_QMK, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE))
                 .addGap(31, 31, 31)
                 .addComponent(btnLayMa, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(178, Short.MAX_VALUE))
+                .addContainerGap(179, Short.MAX_VALUE))
         );
 
         pnCardParent.add(pnQuenMatKhau, "cardQuenMK");
@@ -506,7 +510,7 @@ public class QLDangNhap extends javax.swing.JFrame {
                     .addComponent(txtMaXacNhan, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE))
                 .addGap(31, 31, 31)
                 .addComponent(btnXacNhanMa, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(178, Short.MAX_VALUE))
+                .addContainerGap(179, Short.MAX_VALUE))
         );
 
         pnCardParent.add(pnXacNhanQMK, "cardXacNhanMK");
@@ -601,7 +605,7 @@ public class QLDangNhap extends javax.swing.JFrame {
                     .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(34, 34, 34)
                 .addComponent(btnDoiMK, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(131, Short.MAX_VALUE))
+                .addContainerGap(132, Short.MAX_VALUE))
         );
 
         pnCardParent.add(pnDatMKMoi, "cardDatMKMoi");
@@ -621,7 +625,9 @@ public class QLDangNhap extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnDangKyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangKyActionPerformed
-        
+        if(this.checkFormDangKy()){
+            this.dangKy();
+        }
     }//GEN-LAST:event_btnDangKyActionPerformed
 
     private void lblQuenMatKhau1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblQuenMatKhau1MouseClicked
@@ -699,6 +705,12 @@ public class QLDangNhap extends javax.swing.JFrame {
     private void btnFacebook4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFacebook4ActionPerformed
         this.linkFacebook();
     }//GEN-LAST:event_btnFacebook4ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if (this.checkFormLogin()) {
+            this.Login();
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -785,7 +797,7 @@ public class QLDangNhap extends javax.swing.JFrame {
     private javax.swing.JPanel pnDatMKMoi;
     private javax.swing.JPanel pnQuenMatKhau;
     private javax.swing.JPanel pnXacNhanQMK;
-    private javax.swing.JPasswordField txtEmail;
+    private javax.swing.JTextField txtEmail;
     private javax.swing.JPasswordField txtMKmoi;
     private javax.swing.JTextField txtMaXacNhan;
     private javax.swing.JPasswordField txtMatKhau;
@@ -797,7 +809,7 @@ public class QLDangNhap extends javax.swing.JFrame {
     private javax.swing.JPasswordField txtXacNhanMKmoi;
     // End of variables declaration//GEN-END:variables
 
-    private void setIcon(){
+    private void setIcon() {
         try {
             String pathFacebook = "src/Image/facebook.png";
             ImageIcon facebook = new ImageIcon(new ImageIcon(pathFacebook).getImage());
@@ -806,7 +818,7 @@ public class QLDangNhap extends javax.swing.JFrame {
             btnFacebook2.setIcon(facebook);
             btnFacebook3.setIcon(facebook);
             btnFacebook4.setIcon(facebook);
-            
+
             String pathIstagram = "src/Image/instagram.png";
             ImageIcon instagram = new ImageIcon(new ImageIcon(pathIstagram).getImage());
             btnInstagram.setIcon(instagram);
@@ -814,7 +826,7 @@ public class QLDangNhap extends javax.swing.JFrame {
             btnInstagram2.setIcon(instagram);
             btnInstagram3.setIcon(instagram);
             btnInstagram4.setIcon(instagram);
-            
+
             String pathEmail = "src/Image/email.png";
             ImageIcon email = new ImageIcon(new ImageIcon(pathEmail).getImage());
             btnEmail.setIcon(email);
@@ -822,7 +834,7 @@ public class QLDangNhap extends javax.swing.JFrame {
             btnEmail2.setIcon(email);
             btnEmail3.setIcon(email);
             btnEmail4.setIcon(email);
-            
+
             String pathLogo = "src/Image/logo.png";
             ImageIcon logo = new ImageIcon(new ImageIcon(pathLogo).getImage());
             lblLogo.setIcon(logo);
@@ -830,95 +842,181 @@ public class QLDangNhap extends javax.swing.JFrame {
             lblLogo2.setIcon(logo);
             lblLogo3.setIcon(logo);
             lblLogo4.setIcon(logo);
-            
+
             String pathUserName = "src/Image/userName.png";
             ImageIcon userName = new ImageIcon(new ImageIcon(pathUserName).getImage());
             lblTenTaiKhoan.setIcon(userName);
-            
+
             String pathPassWord = "src/Image/password.png";
             ImageIcon password = new ImageIcon(new ImageIcon(pathPassWord).getImage());
             lblMatKhau.setIcon(password);
-            
+
             String pathBack = "src/Image/back.png";
             ImageIcon back = new ImageIcon(new ImageIcon(pathBack).getImage());
             btnBack.setIcon(back);
             btnBack1.setIcon(back);
             btnBack2.setIcon(back);
-            btnBack3.setIcon(back);            
+            btnBack3.setIcon(back);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    
+
     CardLayout cardParent;
-    private void setCardDangKy(){
+
+    private void setCardDangKy() {
         try {
             cardParent = (CardLayout) pnCardParent.getLayout();
-            cardParent.show(pnCardParent, "cardDangKy");           
+            cardParent.show(pnCardParent, "cardDangKy");
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    
-    private void setCardDangNhap(){
+
+    private void setCardDangNhap() {
         try {
             cardParent = (CardLayout) pnCardParent.getLayout();
-            cardParent.show(pnCardParent, "cardDangNhap");           
+            cardParent.show(pnCardParent, "cardDangNhap");
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    
-    private void setCardQuenMK(){
+
+    private void setCardQuenMK() {
         try {
             cardParent = (CardLayout) pnCardParent.getLayout();
-            cardParent.show(pnCardParent, "cardQuenMK");  
-            
+            cardParent.show(pnCardParent, "cardQuenMK");
+
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    
-    private void setCardXacNhanMK(){
+
+    private void setCardXacNhanMK() {
         try {
             cardParent = (CardLayout) pnCardParent.getLayout();
-            cardParent.show(pnCardParent, "cardXacNhanMK");  
-            
+            cardParent.show(pnCardParent, "cardXacNhanMK");
+
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    
-    private void setCardDatMKMoi(){
+
+    private void setCardDatMKMoi() {
         try {
             cardParent = (CardLayout) pnCardParent.getLayout();
-            cardParent.show(pnCardParent, "cardDatMKMoi");  
-            
+            cardParent.show(pnCardParent, "cardDatMKMoi");
+
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    
-    private void linkFacebook(){
+
+    private void linkFacebook() {
         Desktop browser = Desktop.getDesktop();
         try {
             browser.browse(new URI("https://www.facebook.com/trun01/"));
         } catch (IOException e) {
             e.printStackTrace();
-        } catch(URISyntaxException e){            
+        } catch (URISyntaxException e) {
             e.printStackTrace();
         }
     }
-    
-    private void linkInstagram(){
+
+    private void linkInstagram() {
         Desktop browser = Desktop.getDesktop();
         try {
             browser.browse(new URI("https://www.instagram.com/trunn01/"));
         } catch (IOException e) {
             e.printStackTrace();
-        } catch(URISyntaxException e){            
+        } catch (URISyntaxException e) {
             e.printStackTrace();
         }
     }
+    IQLDangNhapService IQLDangNhapService;
+
+    void Login() {
+        try {
+            String taiKhoan = txtTenTaiKhoan.getText().trim();
+            String matKhau = new String(txtMatKhau.getPassword());
+            IQLDangNhapService.checkLogin(taiKhoan, matKhau);
+            DialogHelper.alert(this, "Đăng nhập thành công");
+        } catch (Exception e) {
+            e.printStackTrace();
+            DialogHelper.alert(this, "Đăng nhập thất bại");
+        }
+    }
+
+    private boolean checkFormLogin() {
+        if (txtTenTaiKhoan.getText().isBlank()) {
+            DialogHelper.alert(this, "Bạn chưa nhập tên tài khoản");
+            txtTenTaiKhoan.requestFocus();
+            return false;
+        }
+        if (txtMatKhau.getPassword().length <= 0) {
+            DialogHelper.alert(this, "Bạn chưa nhập mật khẩu");
+            txtMatKhau.requestFocus();
+            return false;
+        }
+        return true;
+    }
+
+    private void dangKy() {
+        try {
+            //IQLDangNhapService.dangKy();
+            DialogHelper.alert(this, "Đăng ký thành công");
+        } catch (Exception e) {
+            DialogHelper.alert(this, "Đăng ký không thành công");
+            e.printStackTrace();
+        }
+    }
+
+    private boolean checkFormDangKy() {
+        if (txtTenTaiKhoan_DK.getText().isBlank()) {
+            DialogHelper.alert(this, "Bạn phải nhập tên tài khoản");
+            txtTenTaiKhoan_DK.requestFocus();
+            return false;
+        }   
+        if (!txtTenTaiKhoan_DK.getText().matches("^(?=[a-zA-Z0-9._]{4,16}$)(?!.*[_.]{2})[^_.].*[^_.]$")) {
+            DialogHelper.alert(this, "Tên tài khoản phải trong khoảng 4-16 ký tự tiếng việt không dấu và không chứa dấu cách");
+            txtTenTaiKhoan_DK.requestFocus();
+            return false;
+        }
+        if (txtMatKhau_DK.getPassword().length == 0) {
+            DialogHelper.alert(this, "Bạn chưa nhập mật khẩu");
+            txtMatKhau_DK.requestFocus();
+            return false;
+        }
+        if(!new String(txtMatKhau_DK.getPassword()).matches("^(?=[a-zA-Z0-9._]{3,10}$)(?!.*[_.]{2})[^_.].*[^_.]$")){
+            DialogHelper.alert(this, "Mật khẩu phải trong khoảng 3-10 ký tự tiếng việt không dấu và không chứa dấu cách");
+            txtMatKhau_DK.requestFocus();
+            return false;
+        }
+        if (txtXacNhanMK.getPassword().length == 0) {
+            DialogHelper.alert(this, "Vui lòng xác nhận mật khẩu");
+            txtXacNhanMK.requestFocus();
+            return false;
+        }
+        if(!new String(txtXacNhanMK.getPassword()).equals(new String(txtMatKhau_DK.getPassword()))){
+            DialogHelper.alert(this, "Xác nhận mật khẩu không khớp");
+            txtXacNhanMK.requestFocus();
+            return false;
+        }
+        if(txtEmail.getText().isBlank()){
+            DialogHelper.alert(this, "Vui lòng nhập email");
+            txtEmail.requestFocus();
+            return false;
+        }
+        if(!txtEmail.getText().matches("\\w+@\\w+(\\.\\w+)+")){
+            DialogHelper.alert(this, "Email không đúng định dạng");
+            txtEmail.requestFocus();
+            return false;
+        }
+        return true;
+    }
     
+    private void quenMatKhau(){
+        
+    }
+
 }

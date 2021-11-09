@@ -6,7 +6,7 @@
 package GUI;
 
 import ISERVICES.IQLLoaiPhongService;
-import MODEL.LoaiPhong;
+import MODEL.LoaiPhong2;
 import Ultilities.DialogHelper;
 
 /**
@@ -98,6 +98,7 @@ public class QuanLyLoaiPhong extends javax.swing.JInternalFrame {
                 return types [columnIndex];
             }
         });
+        tblQLLoaiPhong.setRowHeight(20);
         tblQLLoaiPhong.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane2.setViewportView(tblQLLoaiPhong);
 
@@ -222,11 +223,11 @@ public class QuanLyLoaiPhong extends javax.swing.JInternalFrame {
                             .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtDienTich, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(rdoKhongSuDung)
-                        .addComponent(rdoDangSuDung)))
+                        .addComponent(rdoDangSuDung))
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(28, 28, 28)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -263,7 +264,7 @@ public class QuanLyLoaiPhong extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_btnXoaActionPerformed
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
@@ -312,7 +313,7 @@ public class QuanLyLoaiPhong extends javax.swing.JInternalFrame {
 
     private void them() {
         try {
-            IQLLoaiPhongService.them(getForm());
+          //  IQLLoaiPhongService.them(getForm());
             DialogHelper.alert(this, "Thêm thành công");
         } catch (Exception e) {
             DialogHelper.alert(this, "Thêm thất bại");
@@ -322,7 +323,7 @@ public class QuanLyLoaiPhong extends javax.swing.JInternalFrame {
 
     private void capNhat() {
         try {
-            IQLLoaiPhongService.capNhat(getForm());
+           // IQLLoaiPhongService.capNhat(getForm());
             DialogHelper.alert(this, "Cập nhật thành công");
         } catch (Exception e) {
             DialogHelper.alert(this, "Cập nhật thất bại");
@@ -330,8 +331,24 @@ public class QuanLyLoaiPhong extends javax.swing.JInternalFrame {
         }
     }
 
-    private LoaiPhong getForm() {
-        LoaiPhong loaiPhong = new LoaiPhong();
+    private void xoa() {
+        if(txtMaLoaiPhong.getText().trim().isBlank()){
+            DialogHelper.alert(this, "Bạn phải nhập mã loại phòng trước khi xóa !");
+            return;
+        }
+        if (DialogHelper.confirm(this, "Bạn có chắc chắn xóa ?")) {
+            try {
+                IQLLoaiPhongService.xoa(txtMaLoaiPhong.getText());
+                DialogHelper.alert(this, "Xóa thành công");
+            } catch (Exception e) {
+                DialogHelper.alert(this, "Xóa thất bại");
+                e.printStackTrace();
+            }
+        }
+    }
+    
+    private LoaiPhong2 getForm() {
+        LoaiPhong2 loaiPhong = new LoaiPhong2();
         loaiPhong.setMaLoaiPhong(txtMaLoaiPhong.getText());
         loaiPhong.setDienTich(Float.parseFloat(txtDienTich.getText()));
         loaiPhong.setGiaTien(Float.parseFloat(txtGiaTien.getText()));
@@ -348,18 +365,29 @@ public class QuanLyLoaiPhong extends javax.swing.JInternalFrame {
             txtMaLoaiPhong.requestFocus();
             return false;
         }
+        if (!txtMaLoaiPhong.getText().matches("^[a-zA-Z0-9\\s]+")) {
+            DialogHelper.alert(this, "Mã loại phòng không đúng định dạng ");
+            txtMaLoaiPhong.requestFocus();
+            return false;
+        }
+        
         if (txtTenLoaiPhong.getText().isBlank()) {
             DialogHelper.alert(this, "Không được để trống tên loại phòng");
             txtTenLoaiPhong.requestFocus();
             return false;
         }
+//        if (!txtTenLoaiPhong.getText().matches("^[a-zA-Z0-9\\s]+")) {
+//            DialogHelper.alert(this, "Tên loại phòng không đúng định dạng ");
+//            txtTenLoaiPhong.requestFocus();
+//            return false;
+//        }
         try {
             if (txtGiaTien.getText().isBlank()) {
                 DialogHelper.alert(this, "Không được để trống giá tiền");
                 txtGiaTien.requestFocus();
                 return false;
             }
-            if (Float.parseFloat(txtGiaTien.getText()) > 1000000000 || Float.parseFloat(txtGiaTien.getText())<0 ) {
+            if (Float.parseFloat(txtGiaTien.getText()) > 1000000000 || Float.parseFloat(txtGiaTien.getText()) < 0) {
                 DialogHelper.alert(this, "Giá tiền không được nhỏ hơn 0 và lớn hơn 1 tỷ");
                 txtGiaTien.requestFocus();
                 return false;
@@ -374,10 +402,10 @@ public class QuanLyLoaiPhong extends javax.swing.JInternalFrame {
             DialogHelper.alert(this, "Giá tiền phải nhập số");
             txtGiaTien.requestFocus();
             return false;
-        } catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        
+
         try {
             if (txtDienTich.getText().isEmpty()) {
                 DialogHelper.alert(this, "Không được để trống diện tích");
@@ -404,8 +432,7 @@ public class QuanLyLoaiPhong extends javax.swing.JInternalFrame {
             txtDienTich.requestFocus();
             return false;
         }
-        
-        
+
         return true;
     }
 }
